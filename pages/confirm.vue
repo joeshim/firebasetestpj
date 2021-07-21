@@ -2,11 +2,28 @@
   <div class="confirm">
     <div>
       <h1>ログイン完了！！</h1>
-      <p>{{ログインしたアカウトのユーザ名}}</p>
+      <p>{{this.user}}</p>
       <p>{{ログインしたアカウントのEmail}}</p>
     </div>
   </div>
 </template>
+
+<script>
+import firebase from "~/plugins/firebase";
+export default {
+  created() {
+    const user = firebase.auth().currentUser
+    if (user) {
+      // ログイン済み
+      this.user = user
+    } else {
+      // 未ログイン。ログイン画面へ遷移する
+      this.$router.push('/')
+      return
+    }
+  }
+}
+</script>
 
 <style scoped>
 .confirm {
