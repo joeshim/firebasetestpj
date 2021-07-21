@@ -11,15 +11,9 @@ import firebase from "~/plugins/firebase";
 export default {
   methods: {
     login() {
-      const provider = new firebase.auth.GoogleAuthProvider()
       firebase.auth().signInWithRedirect(provider)
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          this.$router.push('/confirm')
-        } else {
-          alert('失敗')
-          this.$router.push('/')
-        }
+      .then(() => {
+        this.$router.push('/confirm')
       })
     },
   },
