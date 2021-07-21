@@ -23,7 +23,7 @@ export default {
           // The signed-in user info.
           var user = result.user;
           // ...
-          then.$router.push('/confirm')
+          this.$router.push('/confirm')
         }).catch((error) => {
           // Handle Errors here.
           var errorCode = error.code;
