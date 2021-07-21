@@ -2,8 +2,8 @@
   <div class="confirm">
     <div>
       <h1>ログイン完了！！</h1>
-      <p>{{this.user}}</p>
-      <p>{{ログインしたアカウントのEmail}}</p>
+      <p>{{displayName}}</p>
+      <p>{{email}}</p>
     </div>
   </div>
 </template>
@@ -12,11 +12,19 @@
 import firebase from "~/plugins/firebase";
 export default {
   created() {
-    const user = firebase.auth().currentUser
-    if (user) {
-      // ログイン済み
-      this.user = user
-    } else {
+      const user = firebase.auth().currentUser;
+      if (user !== null) {
+        // The user object has basic properties such as display name, email, etc.
+        this.displayName = user.displayName;
+        this.email = user.email;
+        this.photoURL = user.photoURL;
+        this.emailVerified = user.emailVerified;
+
+        // The user's ID, unique to the Firebase project. Do NOT use
+        // this value to authenticate with your backend server, if
+        // you have one. Use User.getToken() instead.
+        const uid = user.uid;
+      } else {
       // 未ログイン。ログイン画面へ遷移する
       this.$router.push('/')
       return

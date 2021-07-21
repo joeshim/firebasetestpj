@@ -39,7 +39,7 @@ export default {
         // ログイン後のページに遷移する
         this.$router.push('/confirm')
       } else {
-        // ログイン失敗。エラー処理など(通常はあり得ない？)
+        // ログイン失敗。
       }
     })
     },
